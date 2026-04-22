@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Installed to ~/Library/LaunchAgents/ by install.sh
+     Placeholders replaced: {{HOME}}, {{MODEL_PATH}} -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.persian-dictation.whisper-server</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/opt/homebrew/bin/whisper-server</string>
+        <string>-m</string>
+        <string>{{MODEL_PATH}}</string>
+        <string>-l</string>
+        <string>fa</string>
+        <string>--host</string>
+        <string>127.0.0.1</string>
+        <string>--port</string>
+        <string>8080</string>
+        <string>-bs</string>
+        <string>1</string>
+        <string>-bo</string>
+        <string>1</string>
+        <string>-t</string>
+        <string>4</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/tmp/whisper-server.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/whisper-server.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/bin:/bin</string>
+    </dict>
+</dict>
+</plist>
