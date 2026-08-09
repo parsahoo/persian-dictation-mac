@@ -120,6 +120,19 @@ This removes the LaunchAgent and Hammerspoon config. Homebrew packages and the W
 
 ---
 
+## Why These Choices (Product Decisions)
+
+| Decision | Why |
+|----------|-----|
+| **100% local / offline** | Privacy is non-negotiable for dictation — you're speaking passwords, personal notes, medical info. Cloud APIs also add latency and recurring cost. Local-first removes both. |
+| **Right Command as hotkey** | It's the only modifier key with zero conflicts on macOS. No app uses it alone, so it never fights shortcuts. One tap to start, one to stop — zero learning curve. |
+| **Always-loaded model** | Whisper's 1.5 GB model takes 2-3 seconds to load from disk. Keeping it in RAM via a LaunchAgent daemon means transcription starts in ~100ms, not 3 seconds. The tradeoff is ~1.6 GB RAM, but modern Macs have plenty. |
+| **Hammerspoon, not a native app** | Building a Swift menubar app would take weeks. Hammerspoon gives global hotkeys, UI overlays, and shell integration in ~300 lines of Lua. Ship fast, iterate later. |
+| **Auto-pause media** | If Spotify is playing while you dictate, Whisper transcribes the music lyrics instead of your voice. Auto-pausing is a UX detail that prevents a confusing failure mode. |
+| **Custom corrections** | Whisper consistently mishears domain-specific words (project names, brand terms). A simple find-replace table in config lets users fix this without retraining a model. |
+
+---
+
 ## How it works
 
 ```
